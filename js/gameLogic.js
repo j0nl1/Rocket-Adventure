@@ -13,8 +13,6 @@ var Game = {
         num2: 50
     },
     framesCounter: 0,
-    trailPlayerOne: [],
-    trailPlayerTwo: [],
     _setCanvasDimensions: function () {
         this.w = window.innerWidth
         this.h = window.innerHeight
@@ -46,14 +44,22 @@ var Game = {
         this.reset()
 
         this.interval = setInterval(() => {
-            // this.clear()
+            this.clear()
             this.framesCounter++
-
-            if (this.framesCounter > 1000) {
-                this.framesCounter = 0
+            
+            if (this.framesCounter % 10 === 0) {
+                this.playerOne.push()
+                this.playerTwo.push()
+            }
+            /* if (this.framesCounter % 200 === 0) {
+                console.log(this.playerOne.trail)
             }
             if (this.framesCounter % 500 === 0) {
-                this.trackerOne.push()
+                this.playerOne.deleteTrack(40)
+                this.playerTwo.deleteTrack(40) 
+            }*/
+            if (this.framesCounter > 1000) {
+                this.framesCounter = 1
             }
             /* if (this.framesCounter % 50 === 0) {
                 this.generatePlanet()
@@ -61,8 +67,8 @@ var Game = {
 
             this.moveAll()
             this.drawAll()
-            this.trackerOne.savePosition()
-            console.log(this.trailPlayerOne)
+            this.trackAll()
+            // console.log(this.playerOne.trail)
             /* if (this.colisionFrame(this.playerOne)){
                 this.gameOver("Player one")
             } else if (this.colisionFrame(this.playerTwo)) {
@@ -78,21 +84,24 @@ var Game = {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     },
     drawAll: function () {
+        this.playScreen.draw()
+        this.playerOne.drawTrack()
+        this.playerTwo.drawTrack()
         this.playerOne.draw()
         this.playerTwo.draw()
-        this.trackerOne = new Tracker(this, this.playerOne)
-        this.trackerOne.drawTrack()
-        this.playScreen.draw()
     },
     moveAll: function () {
         this.playerOne.move()
         this.playerTwo.move()
     },
+    trackAll: function () {
+        this.playerOne.savePosition()
+        this.playerTwo.savePosition()
+    },
     reset: function () {
         this.playScreen = new PlayScreen(this)
         this.playerOne = new Rocket(this, this.playScreen)
         this.playerTwo = new Rocket(this, this.playScreen)
-        this.trackerOne = new Tracker(this, this.playerOne)
     },
     generatePlanet: function () {
 

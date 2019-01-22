@@ -1,4 +1,4 @@
-function Rocket(game, playScreen) {
+function Rocket(game, playScreen, tracker) {
     this.game = game
     this.playScreen = playScreen
     this.img = new Image()
@@ -15,6 +15,8 @@ function Rocket(game, playScreen) {
     this.speed = 0
     this.angle = 0
     this.angularSpeed = 0
+    this.tempTrail = []
+    this.trail = []
 }
 
 function degToRad(angle){
@@ -46,4 +48,29 @@ Rocket.prototype.move = function () {
     this.y += this.speed * Math.sin(this.angle)
 }
 
+Rocket.prototype.push = function () {
+    this.trail.push(this.tempTrail)
+    this.tempTrail = []
+}
+
+Rocket.prototype.savePosition = function () {
+    this.tempTrail.push({posX:this.x, posY:this.y})
+}
+
+Rocket.prototype.drawTrack = function () {
+    this.trail.forEach((subArray) => subArray.forEach((pos) => {
+        this.game.ctx.fillStyle = "#fff"
+        this.game.ctx.fillRect(pos.posX, pos.posY, 5, 5)
+    }))
+}
+
+/* Rocket.prototype.deleteTrack = function (quantity) {
+    for(let i = 0; i < quantity; i++) {
+        this.trail[i].forEach((item, i, object) => object.splice(i, 1) )
+    }
+    for(let i = 0; i < quantity; i++) {
+        this.trail[i].forEach((item, i, object) => object.splice(i, 1) )
+    }
+}
+ */
 Rocket.prototype.constructor = Rocket
