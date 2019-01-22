@@ -6,8 +6,15 @@ var Game = {
     fps: 60,
     key: {
         leftArrow: 37,
-        rightArrow: 39
+        rightArrow: 39,
+        A: 65,
+        D: 68,
+        num1: 49,
+        num2: 50
     },
+    framesCounter: 0,
+    trailPlayerOne: [],
+    trailPlayerTwo: [],
     _setCanvasDimensions: function () {
         this.w = window.innerWidth
         this.h = window.innerHeight
@@ -39,22 +46,28 @@ var Game = {
         this.reset()
 
         this.interval = setInterval(() => {
-            this.clear()
-            /* this.framesCounter++
+            // this.clear()
+            this.framesCounter++
 
             if (this.framesCounter > 1000) {
                 this.framesCounter = 0
             }
-            if (this.framesCounter % 50 === 0) {
+            if (this.framesCounter % 500 === 0) {
+                this.trackerOne.push()
+            }
+            /* if (this.framesCounter % 50 === 0) {
                 this.generatePlanet()
             } */
 
             this.moveAll()
             this.drawAll()
-            if (this.colisionFrame()){
-                console.log("colision")
-                this.stop()
-            }
+            this.trackerOne.savePosition()
+            console.log(this.trailPlayerOne)
+            /* if (this.colisionFrame(this.playerOne)){
+                this.gameOver("Player one")
+            } else if (this.colisionFrame(this.playerTwo)) {
+                this.gameOver("Player two")
+            } */
         })
     },
     stop: function () {
@@ -67,6 +80,8 @@ var Game = {
     drawAll: function () {
         this.playerOne.draw()
         this.playerTwo.draw()
+        this.trackerOne = new Tracker(this, this.playerOne)
+        this.trackerOne.drawTrack()
         this.playScreen.draw()
     },
     moveAll: function () {
@@ -77,54 +92,67 @@ var Game = {
         this.playScreen = new PlayScreen(this)
         this.playerOne = new Rocket(this, this.playScreen)
         this.playerTwo = new Rocket(this, this.playScreen)
+        this.trackerOne = new Tracker(this, this.playerOne)
     },
     generatePlanet: function () {
 
     },
-    colisionFrame: function () {
+    generateTrack: function () {
+
+    },
+    colisionFrame: function (player) {
         if (
-            (this.playerOne.y <= this.playScreen.y) ||
-            (this.playerOne.y >= this.playScreen.y + this.playScreen.height) ||
-            (this.playerOne.x <= this.playScreen.x) ||
-            (this.playerOne.x >= this.playScreen.x + this.playScreen.width)
+            (player.y <= this.playScreen.y) ||
+            (player.y >= this.playScreen.y + this.playScreen.height) ||
+            (player.x <= this.playScreen.x) ||
+            (player.x >= this.playScreen.x + this.playScreen.width)
             ){
             return true
         }
     },
+    gameOver: function (playerWinner) {
+        this.stop()
+        if (confirm(`
+        ${playerWinner} won the game
+        Do you want to play again?`)) {
+            this.reset()
+            this.init("myGame")
+        }
+    },
     handleKeyUp: function (key) {
         switch (key) {
-            case 37:
+            case this.key.leftArrow:
             this.playerOne.angularSpeed = 0;
             break;
-            case 39:
+            case this.key.rightArrow:
             this.playerOne.angularSpeed = 0;
             break;
-            case 65:
+            case this.key.A:
             this.playerTwo.angularSpeed = 0;
             break;
-            case 68:
+            case this.key.D:
             this.playerTwo.angularSpeed = 0;
             break;
         }
     },
     handleKeyDown: function (key) {
         switch (key) {
-            case 37: 
+            case this.key.leftArrow: 
             this.playerOne.turnAngleSpeed(-1);
             break;
-            case 39:
+            case this.key.rightArrow:
             this.playerOne.turnAngleSpeed(1);
             break;
-            case 65: 
+            case this.key.A: 
             this.playerTwo.turnAngleSpeed(-1);
             break;
-            case 68:
+            case this.key.D:
             this.playerTwo.turnAngleSpeed(1);
             break;
-            case 49:
+            case this.key.num1:
             this.stop()
             break;
-            case 50:
+            case this.key.num2:
             this.init()
             break;
         }
