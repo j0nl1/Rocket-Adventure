@@ -51,13 +51,10 @@ var Game = {
                 this.playerOne.push()
                 this.playerTwo.push()
             }
-            /* if (this.framesCounter % 200 === 0) {
-                console.log(this.playerOne.trail)
+            if (this.framesCounter % 10 === 0) {
+                this.playerOne.deleteTrack(200)
+                this.playerTwo.deleteTrack(200) 
             }
-            if (this.framesCounter % 500 === 0) {
-                this.playerOne.deleteTrack(40)
-                this.playerTwo.deleteTrack(40) 
-            }*/
             if (this.framesCounter > 1000) {
                 this.framesCounter = 1
             }
@@ -85,8 +82,8 @@ var Game = {
     },
     drawAll: function () {
         this.playScreen.draw()
-        this.playerOne.drawTrack()
-        this.playerTwo.drawTrack()
+        this.playerOne.drawTrack("#ff0000")
+        this.playerTwo.drawTrack("#cc5500")
         this.playerOne.draw()
         this.playerTwo.draw()
     },
