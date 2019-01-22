@@ -65,13 +65,15 @@ var Game = {
             this.moveAll()
             this.drawAll()
             this.trackAll()
-            // console.log(this.playerOne.trail)
+            /* if (this.colisionTrail()) {
+                console.log("colision")
+            } */
             /* if (this.colisionFrame(this.playerOne)){
                 this.gameOver("Player one")
             } else if (this.colisionFrame(this.playerTwo)) {
                 this.gameOver("Player two")
             } */
-        })
+        }, 100/this.fps)
     },
     stop: function () {
         clearInterval(this.interval)
@@ -103,8 +105,19 @@ var Game = {
     generatePlanet: function () {
 
     },
-    generateTrack: function () {
-
+    colisionTrail: function () {
+        if(this.playerOne.trail.length > 10)
+        for (let i = 0; i < this.playerOne.trail.length; i++) {
+            for (let j = 0; j < this.playerOne.trail[i].length ; j++) {
+                if (this.playerOne.trail[i][j].posX < this.playerOne.x + this.playerOne.width &&
+                this.playerOne.trail[i][j].posX + 5 > this.playerOne.x &&
+                this.playerOne.trail[i][j].posY < this.playerOne.y + this.playerOne.height &&
+                5 + this.playerOne.trail[i][j].posY > this.playerOne.y) {
+                this.gameOver()
+                }
+                return false
+            }
+        }
     },
     colisionFrame: function (player) {
         if (
