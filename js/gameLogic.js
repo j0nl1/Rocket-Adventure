@@ -47,14 +47,10 @@ var Game = {
             this.clear()
             this.framesCounter++
             
-            if (this.framesCounter % 10 === 0) {
-                this.playerOne.push()
-                this.playerTwo.push()
-            }
-            if (this.framesCounter % 10 === 0) {
+            if (this.framesCounter % 100 === 0) {
                 this.playerOne.deleteTrack(200)
                 this.playerTwo.deleteTrack(200) 
-            }
+            } 
             if (this.framesCounter > 1000) {
                 this.framesCounter = 1
             }
@@ -65,15 +61,15 @@ var Game = {
             this.moveAll()
             this.drawAll()
             this.trackAll()
-            /* if (this.colisionTrail()) {
+            if (this.colisionTrail()) {
                 console.log("colision")
-            } */
+            }
             /* if (this.colisionFrame(this.playerOne)){
                 this.gameOver("Player one")
             } else if (this.colisionFrame(this.playerTwo)) {
                 this.gameOver("Player two")
             } */
-        }, 100/this.fps)
+        }, 1000/this.fps)
     },
     stop: function () {
         clearInterval(this.interval)
@@ -108,15 +104,10 @@ var Game = {
     colisionTrail: function () {
         if(this.playerOne.trail.length > 10)
         for (let i = 0; i < this.playerOne.trail.length; i++) {
-            for (let j = 0; j < this.playerOne.trail[i].length ; j++) {
-                if (this.playerOne.trail[i][j].posX < this.playerOne.x + this.playerOne.width &&
-                this.playerOne.trail[i][j].posX + 5 > this.playerOne.x &&
-                this.playerOne.trail[i][j].posY < this.playerOne.y + this.playerOne.height &&
-                5 + this.playerOne.trail[i][j].posY > this.playerOne.y) {
-                this.gameOver()
-                }
-                return false
-            }
+            (this.playerOne.trail[i].posX < this.playerOne.x + this.playerOne.width &&
+            this.playerOne.trail[i].posX + 5 > this.playerOne.x &&
+            this.playerOne.trail[i].posY < this.playerOne.y + this.playerOne.height &&
+            this.playerOne.trail[i].posY + 5 > this.playerOne.y) ? true : false
         }
     },
     colisionFrame: function (player) {
@@ -157,16 +148,16 @@ var Game = {
     handleKeyDown: function (key) {
         switch (key) {
             case this.key.leftArrow: 
-            this.playerOne.turnAngleSpeed(-1);
+            this.playerOne.turnAngleSpeed(-5);
             break;
             case this.key.rightArrow:
-            this.playerOne.turnAngleSpeed(1);
+            this.playerOne.turnAngleSpeed(5);
             break;
             case this.key.A: 
-            this.playerTwo.turnAngleSpeed(-1);
+            this.playerTwo.turnAngleSpeed(-5);
             break;
             case this.key.D:
-            this.playerTwo.turnAngleSpeed(1);
+            this.playerTwo.turnAngleSpeed(5);
             break;
             case this.key.num1:
             this.stop()

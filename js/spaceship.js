@@ -11,11 +11,10 @@ function Rocket(game, playScreen, tracker) {
     this.y = Math.floor(Math.random() * ((this.playScreen.y + this.playScreen.height) - this.playScreen.y + 1)) + this.playScreen.y;
     this.width = 30
     this.height = 30
-    this.acceleration = 1
+    this.acceleration = 4
     this.speed = 0
     this.angle = 0
     this.angularSpeed = 0
-    this.tempTrail = []
     this.trail = []
 }
 
@@ -24,7 +23,7 @@ function degToRad(angle){
 }
 
 Rocket.prototype.turnAngleSpeed = function(aS){
-    if(this.angularSpeed < degToRad(1) && this.angularSpeed > -degToRad(1)){
+    if(this.angularSpeed < degToRad(5) && this.angularSpeed > -degToRad(5)){
         this.angularSpeed += degToRad(aS)
     }
 }
@@ -48,38 +47,24 @@ Rocket.prototype.move = function () {
     this.y += this.speed * Math.sin(this.angle)
 }
 
-Rocket.prototype.push = function () {
-    this.trail.push(this.tempTrail)
-    this.tempTrail = []
-}
-
 Rocket.prototype.savePosition = function () {
-    this.tempTrail.push({posX:this.x-10, posY:this.y-10})
+    this.trail.push({posX:this.x-10, posY:this.y-10})
 }
 
 Rocket.prototype.drawTrack = function (color) {
-    this.trail.forEach((subArray) => subArray.forEach((pos) => {
+    this.trail.forEach((subArray) => {
         this.game.ctx.fillStyle = color
-        this.game.ctx.fillRect(pos.posX+10, pos.posY+10, 5, 5)
-    }))
+        this.game.ctx.fillRect(subArray.posX+10, subArray.posY+10, 5, 5)
+    })
 }
 
 Rocket.prototype.deleteTrack = function (quantity) {
-    if(this.trail.length > quantity) {
-    for(let i = 0; i < 1; i++) {
-        if(this.trail[i].length == 0) {
-            this.trail.splice(i, 1)
-            i--
-        }
-        if(i < 0 ) {
-            i = 0
-        }
-        for(let j=0; j < this.trail[i].length; j++){
-        this.trail[i].splice(j, 1)
-        j--
+    if(this.trail.length > quantity){
+        for (let i = 0; i < this.trail.length; i++){
+            this.trail.slice(i, 1)
         }
     }
 }
-}
+
 
 Rocket.prototype.constructor = Rocket
