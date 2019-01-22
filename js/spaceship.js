@@ -24,7 +24,7 @@ function degToRad(angle){
 }
 
 Rocket.prototype.turnAngleSpeed = function(aS){
-    if(this.angularSpeed < degToRad(10) && this.angularSpeed > -degToRad(10)){
+    if(this.angularSpeed < degToRad(1) && this.angularSpeed > -degToRad(1)){
         this.angularSpeed += degToRad(aS)
     }
 }
@@ -54,23 +54,32 @@ Rocket.prototype.push = function () {
 }
 
 Rocket.prototype.savePosition = function () {
-    this.tempTrail.push({posX:this.x, posY:this.y})
+    this.tempTrail.push({posX:this.x-10, posY:this.y-10})
 }
 
-Rocket.prototype.drawTrack = function () {
+Rocket.prototype.drawTrack = function (color) {
     this.trail.forEach((subArray) => subArray.forEach((pos) => {
-        this.game.ctx.fillStyle = "#fff"
-        this.game.ctx.fillRect(pos.posX, pos.posY, 5, 5)
+        this.game.ctx.fillStyle = color
+        this.game.ctx.fillRect(pos.posX+10, pos.posY+10, 5, 5)
     }))
 }
 
-/* Rocket.prototype.deleteTrack = function (quantity) {
-    for(let i = 0; i < quantity; i++) {
-        this.trail[i].forEach((item, i, object) => object.splice(i, 1) )
-    }
-    for(let i = 0; i < quantity; i++) {
-        this.trail[i].forEach((item, i, object) => object.splice(i, 1) )
+Rocket.prototype.deleteTrack = function (quantity) {
+    if(this.trail.length > quantity) {
+    for(let i = 0; i < 1; i++) {
+        if(this.trail[i].length == 0) {
+            this.trail.splice(i, 1)
+            i--
+        }
+        if(i < 0 ) {
+            i = 0
+        }
+        for(let j=0; j < this.trail[i].length; j++){
+        this.trail[i].splice(j, 1)
+        j--
+        }
     }
 }
- */
+}
+
 Rocket.prototype.constructor = Rocket
