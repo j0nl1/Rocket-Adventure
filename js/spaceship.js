@@ -1,4 +1,4 @@
-function Rocket(game, playScreen, tracker) {
+function Rocket(game, playScreen) {
     this.game = game
     this.playScreen = playScreen
     this.img = new Image()
@@ -9,8 +9,8 @@ function Rocket(game, playScreen, tracker) {
     // this.y = this.playScreen.y + Math.floor((Math.random() * this.playScreen.height) - (this.playScreen.height * 0.1))
     this.x = Math.floor(Math.random() * ((this.playScreen.x + this.playScreen.width) - this.playScreen.x + 1)) + this.playScreen.x;
     this.y = Math.floor(Math.random() * ((this.playScreen.y + this.playScreen.height) - this.playScreen.y + 1)) + this.playScreen.y;
-    this.width = 30
-    this.height = 30
+    this.width = 5
+    this.height = 5
     this.acceleration = 4
     this.speed = 0
     this.angle = 0
@@ -48,20 +48,20 @@ Rocket.prototype.move = function () {
 }
 
 Rocket.prototype.savePosition = function () {
-    this.trail.push({posX:this.x-10, posY:this.y-10})
+    this.trail.push({posX:this.x, posY:this.y})
 }
 
 Rocket.prototype.drawTrack = function (color) {
     this.trail.forEach((subArray) => {
         this.game.ctx.fillStyle = color
-        this.game.ctx.fillRect(subArray.posX+10, subArray.posY+10, 5, 5)
+        this.game.ctx.fillRect(subArray.posX, subArray.posY, 5, 5)
     })
 }
 
-Rocket.prototype.deleteTrack = function (quantity) {
-    if(this.trail.length > quantity){
-        for (let i = 0; i < this.trail.length; i++){
-            this.trail.slice(i, 1)
+Rocket.prototype.deleteTrack = function () {
+    if(this.trail.length > 500){
+        for (let i = 0; i < 2; i++){
+            this.trail.shift()
         }
     }
 }

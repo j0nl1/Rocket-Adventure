@@ -42,6 +42,7 @@ var Game = {
         this._listener()
 
         this.reset()
+        this.clear()
         this.start()
     },
     start: function() {
@@ -49,9 +50,9 @@ var Game = {
             this.clear()
             this.framesCounter++
             
-            if (this.framesCounter % 100 === 0) {
-                this.playerOne.deleteTrack(200)
-                this.playerTwo.deleteTrack(200) 
+            if (this.framesCounter % 2 === 0) {
+                this.playerOne.deleteTrack()
+                this.playerTwo.deleteTrack() 
             } 
             if (this.framesCounter > 1000) {
                 this.framesCounter = 1
@@ -63,12 +64,18 @@ var Game = {
             this.moveAll()
             this.drawAll()
             this.trackAll()
-            if (this.colisionTrail()) {
+            /* if (this.colisionTrail()) {
                 console.log("colision")
+            } */
+            if (this.colisionBetweenRockets(this.playerOne, this.playerTwo)) {
+                this.gameOver("Player Two Won")
+            }
+            if (this.colisionBetweenRockets(this.playerTwo, this.playerOne)) {
+                this.gameOver("Player One Won")
             }
             /* if (this.colisionFrame(this.playerOne)){
                 this.gameOver("Player one")
-            } else if (this.colisionFrame(this.playerTwo)) {
+            } */ /* else if (this.colisionFrame(this.playerTwo)) {
                 this.gameOver("Player two")
             } */
         }, 1000/this.fps)
@@ -104,23 +111,39 @@ var Game = {
 
     },
     colisionTrail: function () {
-        if(this.playerOne.trail.length > 10)
-        for (let i = 0; i < this.playerOne.trail.length; i++) {
-            (this.playerOne.trail[i].posX < this.playerOne.x + this.playerOne.width &&
-            this.playerOne.trail[i].posX + 5 > this.playerOne.x &&
-            this.playerOne.trail[i].posY < this.playerOne.y + this.playerOne.height &&
-            this.playerOne.trail[i].posY + 5 > this.playerOne.y) ? true : false
+        if(this.playerOne.trail.length > 80) {
+        return this.playerOne.trail.some((e) => {
+            if (e.posX < this.playerOne.x + this.playerOne.width &&
+            e.posX  > this.playerOne.x &&
+            e.posY < this.playerOne.y + this.playerOne.height &&
+            e.posY  > this.playerOne.y) {
+                debugger
+                return true
+            }
+                return false
+            })
+    }
+    },
+    colisionBetweenRockets: function (player1, player2) {
+        if(player1.trail.length > 10) {
+            return player1.trail.some((e) => {
+                if (e.posX < player2.x + player2.width &&
+                    e.posX  > player2.x &&
+                    e.posY < player2.y + player2.height &&
+                    e.posY  > player2.y){
+                    return true
+                }
+                    return false
+                })
         }
     },
     colisionFrame: function (player) {
-        if (
+        return (
             (player.y <= this.playScreen.y) ||
             (player.y >= this.playScreen.y + this.playScreen.height) ||
             (player.x <= this.playScreen.x) ||
             (player.x >= this.playScreen.x + this.playScreen.width)
-            ){
-            return true
-        }
+            )
     },
     gameOver: function (playerWinner) {
         this.stop()
