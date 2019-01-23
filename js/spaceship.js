@@ -1,6 +1,7 @@
-function Rocket(game, img ,name) {
+function Rocket(game, id, img ,name) {
     this.game = game
     this.name = name
+    this.id = id
     this.color = img.color
     this.playScreen = game.playScreen
     this.img = img

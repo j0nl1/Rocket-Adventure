@@ -13,6 +13,7 @@ var Game = {
 		num2: 50
 	},
 	framesCounter: 0,
+	typeOfPlanets: ["mars", "moon", "jupiter", "earth"],
 	planets: [],
 	_setCanvasDimensions: function () {
 		this.w = window.innerWidth;
@@ -93,11 +94,11 @@ var Game = {
 	},
 	reset: function () {
 		this.playScreen = new PlayScreen(this)
-		this.playerOne = new Rocket(this, imagesLoaded.redRocket ,"Javi" )
-		this.playerTwo = new Rocket(this, imagesLoaded.blueRocket, "Random Player")
+		this.playerOne = new Rocket(this, 1, imagesLoaded.redRocket ,"Javi" )
+		this.playerTwo = new Rocket(this, 2, imagesLoaded.blueRocket, "Random Player")
 	},
 	generatePlanet: function () {
-		this.planets.push(new Planet(this, imagesLoaded.earth))
+		this.planets.push(new Planet(this, imagesLoaded[this.typeOfPlanets[Math.floor(Math.random()*this.typeOfPlanets.length)]]))
 	},
 	gameOver: function (winner) {
 		let message = undefined
