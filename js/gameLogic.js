@@ -56,10 +56,10 @@ var Game = {
 				this.playerOne.deleteTrack();
 				this.playerTwo.deleteTrack();
 			}
-			if (this.framesCounter % 300 === 0) {
+			if (this.framesCounter % 700 === 0) {
 				this.generatePlanet()
 			}
-			if (this.framesCounter > 14000) {
+			if (this.framesCounter > 1400) {
 				this.framesCounter = 0;
 			}
 			collisions(this);

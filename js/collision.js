@@ -7,8 +7,8 @@ function collisions(game) {
 	if (colisionTrail(this.playerTwo)) {this.game.gameOver(1)}
 	if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.gameOver(1)}
 	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.gameOver(2)} 
-	/* if (colisionPlanet(this.playerOne))
-	if (colisionPlanet(this.playerTwo)) */
+	if (colisionPlanet(this.playerOne)) {console.log("colision")}
+	if (colisionPlanet(this.playerTwo)) {}
 		/* if (colisionFrame(this.playerTwo)) {this.game.gameOver(2)}
 		if (colisionFrame(this.playerOne)) {this.game.gameOver(1)} */
 
@@ -51,11 +51,17 @@ function collisions(game) {
 		)
 	}
 	function colisionPlanet(player) {
-		return (
-			player.y <= this.playScreen.y ||
-			player.y >= this.playScreen.y + this.playScreen.height ||
-			player.x <= this.playScreen.x ||
-			player.x >= this.playScreen.x + this.playScreen.width
-		)
+		if (this.game.planets.length > 0) {
+		return this.game.planets.some((e , i) => {
+			if	(e.x < player.x + player.width &&
+				e.x + e.width > player.x &&
+				e.y < player.y + player.height &&
+				e.y + e.height > player.y) 
+			{
+			return true
+			}
+			return false
+		})
 	}
+}
 }	
