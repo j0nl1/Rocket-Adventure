@@ -1,6 +1,8 @@
-function Rocket(game, playScreen) {
+function Rocket(game, name, color) {
     this.game = game
-    this.playScreen = playScreen
+    this.name = name
+    this.color = color
+    this.playScreen = game.playScreen
     this.img = new Image()
     this.img.src = "img/rocket.svg"
     this.ratio = 807/549
@@ -51,9 +53,9 @@ Rocket.prototype.savePosition = function () {
     this.trail.push({posX:this.x, posY:this.y})
 }
 
-Rocket.prototype.drawTrack = function (color) {
+Rocket.prototype.drawTrack = function () {
     this.trail.forEach((subArray) => {
-        this.game.ctx.fillStyle = color
+        this.game.ctx.fillStyle = this.color
         this.game.ctx.fillRect(subArray.posX, subArray.posY, 5, 5)
     })
 }
