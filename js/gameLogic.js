@@ -42,7 +42,9 @@ var Game = {
         this._listener()
 
         this.reset()
-
+        this.start()
+    },
+    start: function() {
         this.interval = setInterval(() => {
             this.clear()
             this.framesCounter++
@@ -163,7 +165,7 @@ var Game = {
             this.stop()
             break;
             case this.key.num2:
-            this.init()
+            this.start()
             break;
         }
     },
