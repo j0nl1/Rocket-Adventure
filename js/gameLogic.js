@@ -13,6 +13,7 @@ var Game = {
 		num2: 50
 	},
 	framesCounter: 0,
+	planets: [],
 	_setCanvasDimensions: function () {
 		this.w = window.innerWidth;
 		this.h = window.innerHeight;
@@ -28,11 +29,11 @@ var Game = {
 		};
 	},
 	_listener: function () {
-		document.onkeydown = e => this.handleKeyDown(e.keyCode);
-		document.onkeyup = e => this.handleKeyUp(e.keyCode);
+		document.onkeydown = e => this.handleKeyDown(e.keyCode)
+		document.onkeyup = e => this.handleKeyUp(e.keyCode)
 	},
 	init: function () {
-		this.canvas = document.querySelector("#spaceGame");
+		this.canvas = document.querySelector("#spaceGame")
 		this.ctx = this.canvas.getContext("2d");
 		this.fps = 60;
 		this._setCanvasDimensions();
@@ -41,7 +42,10 @@ var Game = {
 
 		this.reset();
 		this.clear();
-		setTimeout(this.start(), 3000);
+		this.drawAll();
+		setTimeout(() =>{
+			this.start()
+		}, 3000);
 	},
 	start: function () {
 		this.interval = setInterval(() => {
@@ -52,10 +56,11 @@ var Game = {
 				this.playerOne.deleteTrack();
 				this.playerTwo.deleteTrack();
 			}
-			/* if (this.framesCounter % 50 === 0) {
-				this.generatePlanet()} */
-			if (this.framesCounter > 1000) {
-				this.framesCounter = 1;
+			if (this.framesCounter % 300 === 0) {
+				this.generatePlanet()
+			}
+			if (this.framesCounter > 14000) {
+				this.framesCounter = 0;
 			}
 			collisions(this);
 			this.moveAll();
@@ -76,6 +81,7 @@ var Game = {
 		this.playerTwo.drawTrack();
 		this.playerOne.draw();
 		this.playerTwo.draw();
+		this.planets.forEach((e) => {e.draw()})
 	},
 	moveAll: function () {
 		this.playerOne.move();
@@ -86,12 +92,12 @@ var Game = {
 		this.playerTwo.savePosition();
 	},
 	reset: function () {
-		this.playScreen = new PlayScreen(this);
-		this.playerOne = new Rocket(this, "Javi", "#ff0000");
-		this.playerTwo = new Rocket(this, "Random Player", "#cc5500");
+		this.playScreen = new PlayScreen(this)
+		this.playerOne = new Rocket(this, imagesLoaded.redRocket ,"Javi" )
+		this.playerTwo = new Rocket(this, imagesLoaded.blueRocket, "Random Player")
 	},
 	generatePlanet: function () {
-
+		this.planets.push(new Planet(this, imagesLoaded.earth))
 	},
 	gameOver: function (winner) {
 		let message = undefined
@@ -109,7 +115,7 @@ var Game = {
         Do you want to play again?`)
 		) {
 			this.reset();
-			this.init("myGame");
+			this.init("myGame")
 		}
 	},
 	handleKeyUp: function (key) {

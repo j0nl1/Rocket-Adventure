@@ -7,8 +7,10 @@ function collisions(game) {
 	if (colisionTrail(this.playerTwo)) {this.game.gameOver(1)}
 	if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.gameOver(1)}
 	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.gameOver(2)} 
-		if (colisionFrame(this.playerTwo)) {this.gameOver("Player two")}
-		if (colisionFrame(this.playerOne)) {this.gameOver("Player one")}
+	/* if (colisionPlanet(this.playerOne))
+	if (colisionPlanet(this.playerTwo)) */
+		/* if (colisionFrame(this.playerTwo)) {this.game.gameOver(2)}
+		if (colisionFrame(this.playerOne)) {this.game.gameOver(1)} */
 
 	function colisionTrail(player) {
 		let i = this.playerOne.trail.length - 50;
@@ -34,13 +36,21 @@ function collisions(game) {
 					e.posY < player2.y + player2.height &&
 					e.posY > player2.y
 				) {
-					return true;
+					return true
 				}
-				return false;
+				return false
 			});
 		}
 	}
 	function colisionFrame(player) {
+		return (
+			player.y <= this.playScreen.y ||
+			player.y >= this.playScreen.y + this.playScreen.height ||
+			player.x <= this.playScreen.x ||
+			player.x >= this.playScreen.x + this.playScreen.width
+		)
+	}
+	function colisionPlanet(player) {
 		return (
 			player.y <= this.playScreen.y ||
 			player.y >= this.playScreen.y + this.playScreen.height ||

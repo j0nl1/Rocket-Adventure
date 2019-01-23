@@ -1,16 +1,15 @@
-function Rocket(game, name, color) {
+function Rocket(game, img ,name) {
     this.game = game
     this.name = name
-    this.color = color
+    this.color = img.color
     this.playScreen = game.playScreen
-    this.img = new Image()
-    this.img.src = "img/rocket.svg"
-    this.ratio = 807/549
+    this.img = img
+    this.ratio = 935/640
     this.rocketSize = 20
     // this.x = this.playScreen.x + Math.floor((Math.random() * this.playScreen.width) - (this.playScreen.width * 0.1))
     // this.y = this.playScreen.y + Math.floor((Math.random() * this.playScreen.height) - (this.playScreen.height * 0.1))
-    this.x = Math.floor(Math.random() * ((this.playScreen.x + this.playScreen.width) - this.playScreen.x + 1)) + this.playScreen.x;
-    this.y = Math.floor(Math.random() * ((this.playScreen.y + this.playScreen.height) - this.playScreen.y + 1)) + this.playScreen.y;
+    this.x = Math.floor(Math.random() * ((this.playScreen.x  + this.playScreen.width) - this.playScreen.x + 1)) + this.playScreen.x;
+    this.y = Math.floor(Math.random() * ((this.playScreen.y  + this.playScreen.height) - this.playScreen.y + 1)) + this.playScreen.y;
     this.width = 5
     this.height = 5
     this.acceleration = 4
