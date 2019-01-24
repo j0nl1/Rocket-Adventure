@@ -1,0 +1,25 @@
+{
+  "name": "SpaceCrush",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j0nl1/SpaceCrush.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j0nl1/SpaceCrush/issues"
+  },
+  "homepage": "https://github.com/j0nl1/SpaceCrush#readme",
+  "dependencies": {
+    "bnpm": "^1.0.0",
+    "bootstrap": "^4.2.1",
+    "i": "^0.3.6"
+  }
+}

@@ -12,6 +12,7 @@ var Game = {
 		num1: 49,
 		num2: 50
 	},
+	counter: 3,
 	framesCounter: 0,
 	planets: [],
 	_setCanvasDimensions: function () {
@@ -45,9 +46,7 @@ var Game = {
 		this.reset()
 		this.initBackground()
 		this.drawAll()
-		setTimeout(() =>{
-			this.start()
-		}, 3000);
+		this.countBack()
 	},
 	start: function () {
 		this.interval = setInterval(() => {
@@ -57,7 +56,7 @@ var Game = {
 				this.playerOne.deleteTrack();
 				this.playerTwo.deleteTrack();
 			}
-			if (this.framesCounter % 700 === 0) {
+			if (this.framesCounter % 300 === 0) {
 				this.generatePlanet()
 			}
 			if (this.framesCounter > 1400) {
@@ -73,7 +72,21 @@ var Game = {
 		clearInterval(this.interval);
 	},
 	initBackground: function () {
-		this.ctx.drawImage(allImages.background.main, 0, 0, this.w, this.h)
+		this.ctx.drawImage(allImages.backgrounds.main, 0, 0, this.w, this.h)
+	},
+	countBack: function () {
+		setTimeout(() =>{
+			this.drawAll();
+			this.ctx.font = "100px Arial"
+			this.ctx.fillStyle = "#fff"
+			this.ctx.fillText(this.counter, this.w / 2 - 30, this.h / 2 - 30)
+			this.counter--
+			if(this.counter > -1)
+				{this.countBack()}
+			if(this.counter === -1) {
+				this.start()
+			}
+		}, 1000);
 	},
 	drawAll: function () {
 		this.playScreen.draw();
@@ -93,8 +106,10 @@ var Game = {
 	},
 	reset: function () {
 		this.playScreen = new PlayScreen(this)
-		this.playerOne = new Rocket(this, 1, allImages.rockets.redRocket ,"Javi" )
-		this.playerTwo = new Rocket(this, 2, allImages.rockets.blueRocket, "Random Player")
+		this.playerOne = new Rocket(this, 1, allImages.rockets.redRocket ,"JAVI" )
+		this.playerTwo = new Rocket(this, 2, allImages.rockets.blueRocket, "RANDOM")
+		this.framesCounter = 0
+		this.planets = []
 	},
 	generatePlanet: function () {
 		 this.planets.push(new Planet(this, allImages.planets[Object.keys(allImages.planets)[Math.floor(Math.random()*Object.keys(allImages.planets).length)]]))
@@ -104,14 +119,20 @@ var Game = {
 		this.stop();
 		switch (winner) {
 			case 1:
-				message = `${this.playerOne.name} won the game!!`
+				message = `${this.playerOne.name}`
 				break;
 			case 2:
-				message = `${this.playerTwo.name} won the game!!`
+				message = `${this.playerTwo.name}`
 		}
+		setTimeout(() => {
+			this.ctx.drawImage(allImages.backgrounds.winner, this.playScreen.x + 200, this.playScreen.y + 200, 320, 400)
+			this.ctx.font = "15px Arial"
+			this.ctx.fillStyle = "#fff"
+			this.ctx.fillText(message, this.playScreen.x + 205, this.playScreen.y + 275)
+			this.ctx.fillText("WON", this.playScreen.x + 205, this.playScreen.y + 300)
+		},10)
 		if (
 			confirm(`
-        ${message}
         Do you want to play again?`)
 		) {
 			this.reset();

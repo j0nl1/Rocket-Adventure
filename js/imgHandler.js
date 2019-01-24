@@ -11,8 +11,9 @@ var images = {
     whiteRocket: {src: "img/rockets/white.svg", color: "#ffffff"},
     yellowRocket: {src: "img/rockets/yellow.svg", color: "fff600"}
     },
-    background: {
+    backgrounds: {
         main: {src: "img/backgrounds/main.png"},
+        winner: {src: "img/backgrounds/winner.svg"},
         starfield: {src: "img/backgrounds/starfield.png"}
     }
 }

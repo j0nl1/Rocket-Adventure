@@ -5,9 +5,9 @@ function collisions(game) {
 	this.playerTwo = this.game.playerTwo
 	if (colisionTrail(this.playerOne)) {this.game.gameOver(2)}
 	if (colisionTrail(this.playerTwo)) {this.game.gameOver(1)}
-	/* if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.gameOver(1)}
+	if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.gameOver(1)}
 	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.gameOver(2)} 
-	if (colisionFrame(this.playerTwo)) {this.game.gameOver(2)}
+/* 	if (colisionFrame(this.playerTwo)) {this.game.gameOver(2)}
 	if (colisionFrame(this.playerOne)) {this.game.gameOver(1)} */
 	colisionPlanet(this.playerOne)
 	colisionPlanet(this.playerTwo)
