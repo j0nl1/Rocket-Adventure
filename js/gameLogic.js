@@ -110,6 +110,7 @@ var Game = {
 		this.playerTwo = new Rocket(this, 2, allImages.rockets.blueRocket, "RANDOM")
 		this.userExperience = new UserExperience (this)
 		this.framesCounter = 0
+		this.counter = 3
 		this.planets = []
 	},
 	generatePlanet: function () {
@@ -149,7 +150,7 @@ var Game = {
 				this.stop();
 				break;
 			case this.key.num2:
-				this.start();
+				this.countBack();
 				break;
 		}
 	}
