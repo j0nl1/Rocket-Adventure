@@ -2,8 +2,8 @@ function Planet(game, img) {
     this.game = game
     this.playScreen = this.game.playScreen
     this.img = img
-    this.x = Math.floor(Math.random() * ((this.playScreen.x + this.playScreen.width) - this.playScreen.x + 1)) + this.playScreen.x;
-    this.y = Math.floor(Math.random() * ((this.playScreen.y + this.playScreen.height) - this.playScreen.y + 1)) + this.playScreen.y;
+    this.x = this.playScreen.x + 100 + (Math.random() * (this.playScreen.width - 200))
+    this.y = this.playScreen.y + 100 + (Math.random() * (this.playScreen.height - 200))
     this.width = 40
     this.height = 40
     this.power = img.power

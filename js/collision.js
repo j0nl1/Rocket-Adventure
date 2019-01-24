@@ -3,12 +3,12 @@ function collisions(game) {
 	this.playScreen = this.game.playScreen
 	this.playerOne = this.game.playerOne
 	this.playerTwo = this.game.playerTwo
-	if (colisionTrail(this.playerOne)) {this.game.gameOver(2)}
-	if (colisionTrail(this.playerTwo)) {this.game.gameOver(1)}
-	if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.gameOver(1)}
-	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.gameOver(2)} 
-/* 	if (colisionFrame(this.playerTwo)) {this.game.gameOver(2)}
-	if (colisionFrame(this.playerOne)) {this.game.gameOver(1)} */
+	if (colisionTrail(this.playerOne)) {this.game.userExperience.gameOver(2)}
+	if (colisionTrail(this.playerTwo)) {this.game.userExperience.gameOver(1)}
+	if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.userExperience.gameOver(1)}
+	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.userExperience.gameOver(2)} 
+	// if (colisionFrame(this.playerTwo)) {this.game.userExperience.gameOver(2)}
+	// if (colisionFrame(this.playerOne)) {this.game.userExperience.gameOver(1)}
 	colisionPlanet(this.playerOne)
 	colisionPlanet(this.playerTwo)
 

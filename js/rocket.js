@@ -8,10 +8,8 @@ function Rocket(game, id, img ,name) {
     this.invulnerable = false
     this.ratio = 935/640
     this.rocketSize = 20
-    // this.x = this.playScreen.x + Math.floor((Math.random() * this.playScreen.width) - (this.playScreen.width * 0.1))
-    // this.y = this.playScreen.y + Math.floor((Math.random() * this.playScreen.height) - (this.playScreen.height * 0.1))
-    this.x = Math.floor(Math.random() * ((this.playScreen.x  + this.playScreen.width) - this.playScreen.x + 1)) + this.playScreen.x;
-    this.y = Math.floor(Math.random() * ((this.playScreen.y  + this.playScreen.height) - this.playScreen.y + 1)) + this.playScreen.y;
+    this.x = this.playScreen.x + 100 + (Math.random() * (this.playScreen.width - 300))
+    this.y = this.playScreen.y + 100 + (Math.random() * (this.playScreen.height - 200))
     this.width = 10
     this.height = 10
     this.acceleration = 4

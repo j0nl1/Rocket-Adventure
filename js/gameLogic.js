@@ -108,36 +108,12 @@ var Game = {
 		this.playScreen = new PlayScreen(this)
 		this.playerOne = new Rocket(this, 1, allImages.rockets.redRocket ,"JAVI" )
 		this.playerTwo = new Rocket(this, 2, allImages.rockets.blueRocket, "RANDOM")
+		this.userExperience = new UserExperience (this)
 		this.framesCounter = 0
 		this.planets = []
 	},
 	generatePlanet: function () {
 		 this.planets.push(new Planet(this, allImages.planets[Object.keys(allImages.planets)[Math.floor(Math.random()*Object.keys(allImages.planets).length)]]))
-	},
-	gameOver: function (winner) {
-		let message = undefined
-		this.stop();
-		switch (winner) {
-			case 1:
-				message = `${this.playerOne.name}`
-				break;
-			case 2:
-				message = `${this.playerTwo.name}`
-		}
-		setTimeout(() => {
-			this.ctx.drawImage(allImages.backgrounds.winner, this.playScreen.x + 200, this.playScreen.y + 200, 320, 400)
-			this.ctx.font = "15px Arial"
-			this.ctx.fillStyle = "#fff"
-			this.ctx.fillText(message, this.playScreen.x + 205, this.playScreen.y + 275)
-			this.ctx.fillText("WON", this.playScreen.x + 205, this.playScreen.y + 300)
-		},10)
-		if (
-			confirm(`
-        Do you want to play again?`)
-		) {
-			this.reset();
-			this.init("myGame")
-		}
 	},
 	handleKeyUp: function (key) {
 		switch (key) {
