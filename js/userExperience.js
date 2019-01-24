@@ -33,9 +33,18 @@ UserExperience.prototype.gameOver = function (player) {
         this.game.ctx.font = "30px Orbitron"
         this.game.ctx.fillText("Restart Game?", this.gameOverTextPosX, this.gameOverTextPosY)
     },10)
-    document.getElementById('spaceGame').addEventListener("click", () => {
-        this.game.init()
-    })
+    document.getElementById("spaceGame").addEventListener("click", (e) => this.checkButtonRestart(e))
+}
+
+UserExperience.prototype.checkButtonRestart = function (e) {
+    if(
+        e.offsetX > this.gameOverButtonPosX && 
+        e.offsetX < (this.gameOverButtonPosX + this.gameOverButtonWidth) &&
+        e.offsetY > this.gameOverButtonPosY &&
+        e.offsetY < (this.gameOverButtonPosY + this.gameOverButtonHeight)
+        ){
+            this.game.init()
+        }
 }
 
 UserExperience.prototype.music = function () {

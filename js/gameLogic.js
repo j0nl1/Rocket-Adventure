@@ -31,9 +31,12 @@ var Game = {
 			this.drawAll()
 		};
 	},
-	_listener: function () {
+	_keysListener: function () {
 		document.onkeydown = e => this.handleKeyDown(e.keyCode)
 		document.onkeyup = e => this.handleKeyUp(e.keyCode)
+	},
+	_mouseListener: function() {
+		
 	},
 	init: function () {
 		this.canvas = document.querySelector("#spaceGame")
@@ -41,7 +44,7 @@ var Game = {
 		this.fps = 60
 		this._setCanvasDimensions()
 		this._setHandlers()
-		this._listener()
+		this._keysListener()
 
 		this.reset()
 		this.initBackground()
