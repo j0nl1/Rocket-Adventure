@@ -13,7 +13,6 @@ var Game = {
 		num2: 50
 	},
 	framesCounter: 0,
-	typeOfPlanets: ["mars", "moon", "jupiter", "earth"],
 	planets: [],
 	_setCanvasDimensions: function () {
 		this.w = window.innerWidth;
@@ -25,8 +24,10 @@ var Game = {
 	},
 	_setHandlers: function () {
 		window.onresize = () => {
-			this._setCanvasDimensions();
-			this.playScreen = new PlayScreen(this);
+			this._setCanvasDimensions()
+			this.playScreen = new PlayScreen(this)
+			this.initBackground()
+			this.drawAll()
 		};
 	},
 	_listener: function () {
@@ -35,22 +36,21 @@ var Game = {
 	},
 	init: function () {
 		this.canvas = document.querySelector("#spaceGame")
-		this.ctx = this.canvas.getContext("2d");
-		this.fps = 60;
-		this._setCanvasDimensions();
-		this._setHandlers();
-		this._listener();
+		this.ctx = this.canvas.getContext("2d")
+		this.fps = 60
+		this._setCanvasDimensions()
+		this._setHandlers()
+		this._listener()
 
-		this.reset();
-		this.clear();
-		this.drawAll();
+		this.reset()
+		this.initBackground()
+		this.drawAll()
 		setTimeout(() =>{
 			this.start()
 		}, 3000);
 	},
 	start: function () {
 		this.interval = setInterval(() => {
-			this.clear();
 			this.framesCounter++;
 
 			if (this.framesCounter % 2 === 0) {
@@ -72,9 +72,8 @@ var Game = {
 	stop: function () {
 		clearInterval(this.interval);
 	},
-	clear: function () {
-		this.ctx.fillStyle = "#282828";
-		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+	initBackground: function () {
+		this.ctx.drawImage(allImages.background.main, 0, 0, this.w, this.h)
 	},
 	drawAll: function () {
 		this.playScreen.draw();

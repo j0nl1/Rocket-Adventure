@@ -5,6 +5,7 @@ function Rocket(game, id, img ,name) {
     this.color = img.color
     this.playScreen = game.playScreen
     this.img = img
+    this.invulnerable = false
     this.ratio = 935/640
     this.rocketSize = 20
     // this.x = this.playScreen.x + Math.floor((Math.random() * this.playScreen.width) - (this.playScreen.width * 0.1))
@@ -50,7 +51,9 @@ Rocket.prototype.move = function () {
 }
 
 Rocket.prototype.savePosition = function () {
+    if(this.invulnerable == false) {
     this.trail.push({posX:this.x, posY:this.y})
+    }
 }
 
 Rocket.prototype.drawTrack = function () {

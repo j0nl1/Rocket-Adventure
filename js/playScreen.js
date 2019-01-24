@@ -8,7 +8,11 @@ function PlayScreen(game) {
 
 PlayScreen.prototype.draw = function () {
     this.game.ctx.strokeStyle = "#fff"
+    this.game.ctx.lineWidth = 10
     this.game.ctx.strokeRect(this.x, this.y, this.width, this.height)
+    this.game.ctx.fillStyle = "#000"
+    this.game.ctx.fillRect(this.x, this.y, this.width, this.height)
+    this.game.ctx.drawImage(allImages.background.starfield, this.x, this.y, this.width, this.height)
 }
 
 PlayScreen.prototype.constructor = PlayScreen

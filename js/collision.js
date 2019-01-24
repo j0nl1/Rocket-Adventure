@@ -3,24 +3,25 @@ function collisions(game) {
 	this.playScreen = this.game.playScreen
 	this.playerOne = this.game.playerOne
 	this.playerTwo = this.game.playerTwo
-	/* if (colisionTrail(this.playerOne)) {this.game.gameOver(2)}
+	if (colisionTrail(this.playerOne)) {this.game.gameOver(2)}
 	if (colisionTrail(this.playerTwo)) {this.game.gameOver(1)}
-	if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.gameOver(1)}
-	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.gameOver(2)}  */
-	/* if (colisionFrame(this.playerTwo)) {this.game.gameOver(2)}
+	/* if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.gameOver(1)}
+	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.gameOver(2)} 
+	if (colisionFrame(this.playerTwo)) {this.game.gameOver(2)}
 	if (colisionFrame(this.playerOne)) {this.game.gameOver(1)} */
 	colisionPlanet(this.playerOne)
 	colisionPlanet(this.playerTwo)
 
 	function colisionTrail(player) {
-		let i = this.playerOne.trail.length - 50;
+		let i = player.trail.length - 50;
 		if (player.trail.length > 80) {
 			for (i; i >= 0; i--) {
 				if (
 					player.trail[i].posX < player.x + player.width &&
 					player.trail[i].posX > player.x &&
 					player.trail[i].posY < player.y + player.height &&
-					player.trail[i].posY > player.y
+					player.trail[i].posY > player.y &&
+					player.invulnerable == false
 				) {
 					return true;
 				}
@@ -34,7 +35,8 @@ function collisions(game) {
 					e.posX < player2.x + player2.width &&
 					e.posX > player2.x &&
 					e.posY < player2.y + player2.height &&
-					e.posY > player2.y
+					e.posY > player2.y &&
+					player2.invulnerable == false
 				) {
 					return true
 				}

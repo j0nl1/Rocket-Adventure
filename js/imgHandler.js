@@ -2,7 +2,7 @@ var images = {
     planets: {
     moon: {src: "img/planets/moon.svg", power: function(player) {reduceSpeed(player)}},
     mars: {src: "img/planets/mars.svg",power: function(player) {invertKeywords(player)}},
-    jupiter: {src: "img/planets/jupiter.svg", power: function() {ignoreFrames()}},
+    jupiter: {src: "img/planets/jupiter.svg", power: function(player) {invulnerable(player)}},
     earth: {src: "img/planets/earth.svg", power: function() {cleanTrail()}}
     },
     rockets: {
@@ -10,6 +10,10 @@ var images = {
     blueRocket: {src: "img/rockets/blue.svg", color: "#003db7"},
     whiteRocket: {src: "img/rockets/white.svg", color: "#ffffff"},
     yellowRocket: {src: "img/rockets/yellow.svg", color: "fff600"}
+    },
+    background: {
+        main: {src: "img/backgrounds/main.png"},
+        starfield: {src: "img/backgrounds/starfield.png"}
     }
 }
 

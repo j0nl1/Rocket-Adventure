@@ -18,8 +18,11 @@ function invertKeywords(player) { // Mars
     
 }
 
-function ignoreFrames() {  // Jupiter
-    this.game.playerOne.x 
+function invulnerable(player) {  // Jupiter
+    player.invulnerable = true 
+    setTimeout(function() {
+        player.invulnerable = false
+    }, 5000)
 }
 
 function reduceSpeed(player) { // Moon
