@@ -7,8 +7,8 @@ function collisions(game) {
 	if (colisionTrail(this.playerTwo)) {this.game.userExperience.gameOver(1)}
 	if (colisionBetweenRockets(this.playerOne, this.playerTwo)) {this.game.userExperience.gameOver(1)}
 	if (colisionBetweenRockets(this.playerTwo, this.playerOne)) {this.game.userExperience.gameOver(2)} 
-	// if (colisionFrame(this.playerTwo)) {this.game.userExperience.gameOver(2)}
-	// if (colisionFrame(this.playerOne)) {this.game.userExperience.gameOver(1)}
+	if (colisionFrame(this.playerTwo)) {this.game.userExperience.gameOver(2)}
+	if (colisionFrame(this.playerOne)) {this.game.userExperience.gameOver(1)}
 	colisionPlanet(this.playerOne)
 	colisionPlanet(this.playerTwo)
 
