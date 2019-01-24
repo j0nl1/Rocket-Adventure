@@ -11,8 +11,8 @@ function Rocket(game, id, img ,name) {
     // this.y = this.playScreen.y + Math.floor((Math.random() * this.playScreen.height) - (this.playScreen.height * 0.1))
     this.x = Math.floor(Math.random() * ((this.playScreen.x  + this.playScreen.width) - this.playScreen.x + 1)) + this.playScreen.x;
     this.y = Math.floor(Math.random() * ((this.playScreen.y  + this.playScreen.height) - this.playScreen.y + 1)) + this.playScreen.y;
-    this.width = 5
-    this.height = 5
+    this.width = 10
+    this.height = 10
     this.acceleration = 4
     this.speed = 0
     this.angle = 0

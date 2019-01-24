@@ -94,11 +94,11 @@ var Game = {
 	},
 	reset: function () {
 		this.playScreen = new PlayScreen(this)
-		this.playerOne = new Rocket(this, 1, imagesLoaded.redRocket ,"Javi" )
-		this.playerTwo = new Rocket(this, 2, imagesLoaded.blueRocket, "Random Player")
+		this.playerOne = new Rocket(this, 1, allImages.rockets.redRocket ,"Javi" )
+		this.playerTwo = new Rocket(this, 2, allImages.rockets.blueRocket, "Random Player")
 	},
 	generatePlanet: function () {
-		this.planets.push(new Planet(this, imagesLoaded[this.typeOfPlanets[Math.floor(Math.random()*this.typeOfPlanets.length)]]))
+		 this.planets.push(new Planet(this, allImages.planets[Object.keys(allImages.planets)[Math.floor(Math.random()*Object.keys(allImages.planets).length)]]))
 	},
 	gameOver: function (winner) {
 		let message = undefined

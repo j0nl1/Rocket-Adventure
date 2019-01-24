@@ -1,6 +1,6 @@
 function PlayScreen(game) {
     this.game = game
-    this.width = 600
+    this.width = 700
     this.height = 600
     this.x = (this.game.canvas.width - this.width) / 2
     this.y = (this.game.canvas.height - this.height) / 2
