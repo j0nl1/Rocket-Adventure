@@ -9,9 +9,9 @@ var Game = {
 		rightArrow: 39,
 		A: 65,
 		D: 68,
-		num1: 49,
-		num2: 50
+		SPACE: 32
 	},
+	pause: false,
 	counter: 3,
 	framesCounter: 0,
 	planets: [],
@@ -70,6 +70,15 @@ var Game = {
 			this.drawAll();
 			this.trackAll();
 		}, 1000 / this.fps);
+	},
+	pauseResume: function () {
+		if (this.pause == false) {
+			this.stop()
+			return this.pause = !this.pause
+		}
+		this.counter = 3
+		this.countBack()
+		return this.pause = !this.pause
 	},
 	stop: function () {
 		clearInterval(this.interval);
@@ -149,11 +158,8 @@ var Game = {
 			case this.key.D:
 				this.playerTwo.turnAngleSpeed(5);
 				break;
-			case this.key.num1:
-				this.stop();
-				break;
-			case this.key.num2:
-				this.countBack();
+			case this.key.SPACE:
+				this.pauseResume();
 				break;
 		}
 	}
