@@ -10,9 +10,11 @@ function UserExperience(game) {
     this.winnerTextPosX = this.playScreen.x + (this.playScreen.width / 2) - 200
     this.winnerTextPosY = this.playScreen.y + (this.playScreen.height * 0.3)
     this.winner = undefined
+    this.toggle = false
 }
 
 UserExperience.prototype.gameOver = function (player) {
+        this.toggle = true
 		this.game.stop();
 		switch (player) {
 			case 1:
@@ -33,7 +35,12 @@ UserExperience.prototype.gameOver = function (player) {
         this.game.ctx.font = "30px Orbitron"
         this.game.ctx.fillText("Restart Game?", this.gameOverTextPosX, this.gameOverTextPosY)
     },10)
-    document.getElementById("spaceGame").addEventListener("click", (e) => this.checkButtonRestart(e))
+        document.getElementById("spaceGame").addEventListener("click", (e) =>  {
+            if(this.toggle == true) { 
+                this.checkButtonRestart(e)
+            }
+            this.toggle = false
+        })
 }
 
 UserExperience.prototype.checkButtonRestart = function (e) {
