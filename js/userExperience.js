@@ -50,7 +50,7 @@ UserExperience.prototype.checkButtonRestart = function (e) {
         e.offsetY > this.gameOverButtonPosY &&
         e.offsetY < (this.gameOverButtonPosY + this.gameOverButtonHeight)
         ){
-            this.game.init()
+            this.game.restartGame()
         }
 }
 

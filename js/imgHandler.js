@@ -9,7 +9,7 @@ var images = {
     redRocket: {src: "img/rockets/red.svg", color: "#ff0000"},
     blueRocket: {src: "img/rockets/blue.svg", color: "#003db7"},
     whiteRocket: {src: "img/rockets/white.svg", color: "#ffffff"},
-    yellowRocket: {src: "img/rockets/yellow.svg", color: "fff600"}
+    yellowRocket: {src: "img/rockets/yellow.svg", color: "#fff600"}
     },
     backgrounds: {
         main: {src: "img/backgrounds/main.png"},

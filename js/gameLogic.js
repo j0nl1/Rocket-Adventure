@@ -71,6 +71,16 @@ var Game = {
 			this.trackAll();
 		}, 1000 / this.fps);
 	},
+	restartGame: function() {
+		this.playerOne.restartPositionAndTrail()
+		this.playerTwo.restartPositionAndTrail()
+		this.planets = []
+		this.drawAll()
+		this.framesCounter = 0
+		this.counter = 3
+		this.userExperience = new UserExperience (this)
+		this.countBack()
+	},
 	pauseResume: function () {
 		if (this.pause) {
 			this.counter = 3
@@ -118,8 +128,8 @@ var Game = {
 	},
 	reset: function () {
 		this.playScreen = new PlayScreen(this)
-		this.playerOne = new Rocket(this, 1, allImages.rockets.redRocket ,"JAVI" )
-		this.playerTwo = new Rocket(this, 2, allImages.rockets.blueRocket, "RANDOM")
+		this.playerOne = new Rocket(this, 1)
+		this.playerTwo = new Rocket(this, 2)
 		this.userExperience = new UserExperience (this)
 		this.framesCounter = 0
 		this.counter = 3

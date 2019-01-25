@@ -1,10 +1,10 @@
-function Rocket(game, id, img ,name) {
+function Rocket(game, id) {
     this.game = game
     this.name = name
     this.id = id
-    this.color = img.color
+    this.color = undefined
     this.playScreen = game.playScreen
-    this.img = img
+    this.img = undefined
     this.invulnerable = false
     this.ratio = 935/640
     this.rocketSize = 20
@@ -17,6 +17,8 @@ function Rocket(game, id, img ,name) {
     this.angle = 0
     this.angularSpeed = 0
     this.trail = []
+    this.chooseName()
+    this.chooseRocket()
 }
 
 function degToRad(angle){
@@ -69,5 +71,40 @@ Rocket.prototype.deleteTrack = function () {
     }
 }
 
+Rocket.prototype.restartPositionAndTrail = function () {
+        this.trail = []
+		this.x = this.playScreen.x + 100 + (Math.random() * (this.playScreen.width - 300))
+		this.y = this.playScreen.y + 100 + (Math.random() * (this.playScreen.height - 200))
+}
+
+Rocket.prototype.chooseName = function () {
+    let input = prompt(`Player ${this.id} Name`)
+    this.name = input
+}
+
+Rocket.prototype.chooseRocket = function () {
+    let input = prompt(`
+    What color do you want?
+    Red, Blue, White or Yellow`).toLowerCase()
+
+    switch(input) {
+        case "red":
+        this.img = allImages.rockets.redRocket;
+        this.color = this.img.color
+        break;
+        case "blue":
+        this.img = allImages.rockets.blueRocket;
+        this.color = this.img.color
+        break;
+        case "white":
+        this.img = allImages.rockets.whiteRocket;
+        this.color = this.img.color
+        break;
+        case "yellow":
+        this.img = allImages.rockets.yellowRocket;
+        this.color = this.img.color
+        break;
+    }
+}
 
 Rocket.prototype.constructor = Rocket
