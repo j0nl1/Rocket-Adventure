@@ -72,12 +72,12 @@ var Game = {
 		}, 1000 / this.fps);
 	},
 	pauseResume: function () {
-		if (this.pause == false) {
-			this.stop()
+		if (this.pause) {
+			this.counter = 3
+			this.countBack()
 			return this.pause = !this.pause
 		}
-		this.counter = 3
-		this.countBack()
+		this.stop()
 		return this.pause = !this.pause
 	},
 	stop: function () {
