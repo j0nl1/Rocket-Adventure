@@ -11,10 +11,12 @@ var Game = {
 		D: 68,
 		SPACE: 32
 	},
+	music: true,
 	pause: false,
 	counter: 3,
 	framesCounter: 0,
 	planets: [],
+	kindOfRocket: ["Red", "Blue", "White", "Yellow"],
 	_setCanvasDimensions: function () {
 		this.w = window.innerWidth;
 		this.h = window.innerHeight;
@@ -75,10 +77,9 @@ var Game = {
 		this.playerOne.restartPositionAndTrail()
 		this.playerTwo.restartPositionAndTrail()
 		this.planets = []
-		this.drawAll()
 		this.framesCounter = 0
 		this.counter = 3
-		this.userExperience = new UserExperience (this)
+		this.drawAll()
 		this.countBack()
 	},
 	pauseResume: function () {

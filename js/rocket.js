@@ -85,24 +85,33 @@ Rocket.prototype.chooseName = function () {
 Rocket.prototype.chooseRocket = function () {
     let input = prompt(`
     What color do you want?
-    Red, Blue, White or Yellow`).toLowerCase()
+    ${this.game.kindOfRocket}`)
+    input.toLowerCase().charAt(0).toUpperCase()
 
     switch(input) {
-        case "red":
+        case "Red":
         this.img = allImages.rockets.redRocket;
         this.color = this.img.color
+        let indexRed = this.game.kindOfRocket.indexOf("Red")
+        this.game.kindOfRocket.splice(indexRed, 1)
         break;
-        case "blue":
+        case "Blue":
         this.img = allImages.rockets.blueRocket;
         this.color = this.img.color
+        let indexBlue = this.game.kindOfRocket.indexOf("Blue")
+        this.game.kindOfRocket.splice(indexBlue, 1)
         break;
-        case "white":
+        case "White":
         this.img = allImages.rockets.whiteRocket;
         this.color = this.img.color
+        let indexWhite = this.game.kindOfRocket.indexOf("White")
+        this.game.kindOfRocket.splice(indexWhite, 1)
         break;
-        case "yellow":
+        case "Yellow":
         this.img = allImages.rockets.yellowRocket;
         this.color = this.img.color
+        let indexYellow = this.game.kindOfRocket.indexOf("Yellow")
+        this.game.kindOfRocket.splice(indexYellow, 1)
         break;
     }
 }
