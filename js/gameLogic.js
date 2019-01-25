@@ -11,7 +11,7 @@ var Game = {
 		D: 68,
 		SPACE: 32
 	},
-	music: true,
+	music: false,
 	pause: false,
 	counter: 3,
 	framesCounter: 0,
@@ -38,7 +38,9 @@ var Game = {
 		document.onkeyup = e => this.handleKeyUp(e.keyCode)
 	},
 	_mouseListener: function() {
-		
+		document.getElementById("spaceGame").addEventListener("click", (e) =>  {
+                this.userExperience.musicToggle(e)
+			})
 	},
 	init: function () {
 		this.canvas = document.querySelector("#spaceGame")
@@ -47,6 +49,7 @@ var Game = {
 		this._setCanvasDimensions()
 		this._setHandlers()
 		this._keysListener()
+		this._mouseListener()
 
 		this.reset()
 		this.initBackground()
@@ -96,6 +99,7 @@ var Game = {
 	},
 	initBackground: function () {
 		this.ctx.drawImage(allImages.backgrounds.main, 0, 0, this.w, this.h)
+		this.userExperience.drawMusicButtons()
 	},
 	countBack: function () {
 		setTimeout(() =>{

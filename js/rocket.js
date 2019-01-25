@@ -86,7 +86,9 @@ Rocket.prototype.chooseRocket = function () {
     let input = prompt(`
     What color do you want?
     ${this.game.kindOfRocket}`)
-    input.toLowerCase().charAt(0).toUpperCase()
+    input = input.toLowerCase().split("")
+    input[0] = input[0].toUpperCase()
+    input = input.join("")
 
     switch(input) {
         case "Red":

@@ -9,6 +9,11 @@ function UserExperience(game) {
     this.gameOverTextPosY = this.playScreen.y + (this.playScreen.height * 0.6) + (this.gameOverButtonHeight * 0.6)
     this.winnerTextPosX = this.playScreen.x + (this.playScreen.width / 2) - 200
     this.winnerTextPosY = this.playScreen.y + (this.playScreen.height * 0.3)
+    this.soundButtonWidth = 30
+    this.soundButtonHeight = 30
+    this.soundButtonPosX = this.playScreen.x + this.playScreen.width + (this.playScreen.width * 0.02)
+    this.soundButtonPosY = this.playScreen.y + (this.playScreen.height * 0.1)
+    this.audio = new Audio("./sounds/general.mp3")
     this.winner = undefined
     this.toggle = false
 }
@@ -54,6 +59,29 @@ UserExperience.prototype.checkButtonRestart = function (e) {
         }
 }
 
-UserExperience.prototype.music = function () {
-    
+UserExperience.prototype.drawMusicButtons = function () {
+    if (this.game.music) {
+    return this.game.ctx.drawImage(allImages.sounds.on, this.soundButtonPosX, this.soundButtonPosY, this.soundButtonWidth, this.soundButtonHeight)
+    }
+    return this.game.ctx.drawImage(allImages.sounds.off, this.soundButtonPosX, this.soundButtonPosY, this.soundButtonWidth, this.soundButtonHeight)
+}
+
+UserExperience.prototype.musicToggle = function (e) {
+    if(
+        e.offsetX > this.soundButtonPosX && 
+        e.offsetX < (this.soundButtonPosX + this.soundButtonWidth) &&
+        e.offsetY > this.soundButtonPosY &&
+        e.offsetY < (this.soundButtonPosY + this.soundButtonHeight)
+        ){
+            if(this.game.music) {
+                this.game.music = !this.game.music
+                this.game.initBackground()
+                this.game.drawAll()
+                return this.audio.pause()
+            }
+            this.game.music = !this.game.music
+            this.game.initBackground()
+            this.game.drawAll()
+            return this.audio.play()
+        }
 }

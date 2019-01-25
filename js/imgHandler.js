@@ -13,8 +13,11 @@ var images = {
     },
     backgrounds: {
         main: {src: "img/backgrounds/main.png"},
-        winner: {src: "img/backgrounds/winner.svg"},
         starfield: {src: "img/backgrounds/starfield.png"}
+    },
+    sounds: {
+        on: {src: "img/icons/soundOn.svg"},
+        off: {src: "img/icons/soundOff.svg"}
     }
 }
 
